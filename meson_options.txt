@@ -9,5 +9,5 @@ option('max-triggers', type: 'integer', min: 1, value: 10,
        description: 'Max number of Triggers')
 option('max-dbus-path-length', type: 'integer', min: 1, value: 4095,
        description: 'Max length of dbus object path')
-option('max-append-limit', type: 'integer', min: 0, value: 256,
+option('max-append-limit', type: 'integer', min: 0, value: 32768,
        description: 'Max AppendLimit value')
