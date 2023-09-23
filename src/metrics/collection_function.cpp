@@ -14,22 +14,18 @@ class FunctionMinimum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
-        phosphor::logging::log<phosphor::logging::level::ERR>(
-                "Telemetry "
-                "FunctionMinimum",
-                phosphor::logging::entry("SENSOR_PATH=%s",
-                                         self->sensorId.path.c_str()));
 
 // ReadingItem = std::pair<Milliseconds, double>;
 // Milliseconds = std::chrono::duration<uint64_t, std::milli>;
 
-
+        const auto& lt = readings.begin();
+        const auto& rt = readings.end();
         phosphor::logging::log<phosphor::logging::level::ERR>(
         "Telemetry FunctionMinimum ",
         phosphor::logging::entry("size=%u,b=%f,e=%f,min=%f",
                                  readings.size(),
-                                 readings.begin().second,
-                                 readings.end().second,
+                                 lt.second,
+                                 rt.second,
                                  std::min_element(
                                     readings.begin(), readings.end(),
                                     [](const auto& left, const auto& right) {
