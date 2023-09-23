@@ -22,8 +22,8 @@ class FunctionMinimum : public CollectionFunction
         "Telemetry FunctionMinimum ",
         phosphor::logging::entry("size=%u,b=%f,e=%f,min=%f",
                                  readings.size(),
-                                 readings.begin(),
-                                 readings.end(),
+                                 readings.begin()->second,
+                                 readings.end()->second,
                                  std::min_element(
                                     readings.begin(), readings.end(),
                                     [](const auto& left, const auto& right) {
