@@ -62,6 +62,23 @@ class FunctionMaximum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
+        phosphor::logging::log<phosphor::logging::level::ERR>(
+        "Telemetry FunctionMaximum ",
+        phosphor::logging::entry("size=%u,b=%f,e=%f,min=%f",
+                                 readings.size(),
+                                 readings.begin()->second,
+                                 readings.end()->second,
+                                 std::max_element(
+                                    readings.begin(), readings.end(),
+                                    [](const auto& left, const auto& right) {
+                                        return std::make_tuple(!std::isfinite(left.second),
+                                                               left.second) <
+                                               std::make_tuple(!std::isfinite(right.second),
+                                                               right.second);
+                                    })
+                                ->second
+                                 ));
+
         return std::max_element(
                    readings.begin(), readings.end(),
                    [](const auto& left, const auto& right) {
