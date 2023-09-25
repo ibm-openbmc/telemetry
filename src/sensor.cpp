@@ -57,6 +57,12 @@ void Sensor::async_read(std::shared_ptr<utils::UniqueCall::Lock> lock)
                     phosphor::logging::entry("ERROR_CODE=%d", ec.value()));
                 return;
             }
+            phosphor::logging::log<phosphor::logging::level::WARNING>(
+                    "Telemetry Sensor::async_read",
+                    phosphor::logging::entry("SENSOR_PATH=%s", id.path.c_str()),
+                    phosphor::logging::entry("ERROR_CODE=%d", ec.value()));
+
+
             if (auto self = weakSelf.lock())
             {
                 self->updateValue(newValue);
