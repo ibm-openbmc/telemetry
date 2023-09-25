@@ -197,6 +197,10 @@ std::shared_ptr<CollectionFunction>
     makeCollectionFunction(OperationType operationType)
 {
     using namespace std::string_literals;
+    phosphor::logging::log<phosphor::logging::level::ERR>(
+        "Telemetry makeCollectionFunction ",
+        phosphor::logging::entry("operationType %u",operationType
+                                 ));
 
     switch (operationType)
     {
