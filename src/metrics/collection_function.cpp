@@ -34,17 +34,17 @@ class FunctionMinimum : public CollectionFunction
                                     })
                                 ->second
                                  ));
+        return 99;
 
-
-        return std::min_element(
-                   readings.begin(), readings.end(),
-                   [](const auto& left, const auto& right) {
-                       return std::make_tuple(!std::isfinite(left.second),
-                                              left.second) <
-                              std::make_tuple(!std::isfinite(right.second),
-                                              right.second);
-                   })
-            ->second;
+//        return std::min_element(
+//                   readings.begin(), readings.end(),
+//                   [](const auto& left, const auto& right) {
+//                       return std::make_tuple(!std::isfinite(left.second),
+//                                              left.second) <
+//                              std::make_tuple(!std::isfinite(right.second),
+//                                              right.second);
+//                   })
+//            ->second;
     }
 
     double calculateForStartupInterval(std::vector<ReadingItem>& readings,
