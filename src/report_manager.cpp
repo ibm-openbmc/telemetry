@@ -24,10 +24,7 @@ ReportManager::ReportManager(
 {
     phosphor::logging::log<phosphor::logging::level::ERR>(
         "1- Telemetry ReportManager function",
-        phosphor::logging::entry(
-            "FILENAME=%s",
-            static_cast<std::filesystem::path>(path).c_str()),
-        phosphor::logging::entry("appendLimit=%u maxAppendLimit=%u",appendLimit,maxAppendLimit));
+        phosphor::logging::entry("maxAppendLimit=%u",maxAppendLimit));
 
     reports.reserve(maxReports);
 
@@ -71,9 +68,6 @@ ReportManager::ReportManager(
                     }
                     phosphor::logging::log<phosphor::logging::level::ERR>(
                         "2- Telemetry ReportManager register_method AddReport",
-                        phosphor::logging::entry(
-                            "FILENAME=%s",
-                            static_cast<std::filesystem::path>(path).c_str()),
                         phosphor::logging::entry("appendLimit=%u maxAppendLimit=%u",appendLimit,maxAppendLimit));
 
 
@@ -119,10 +113,7 @@ void ReportManager::verifyAddReport(
 {
     namespace ts = utils::tstring;
     phosphor::logging::log<phosphor::logging::level::ERR>(
-        "1- Telemetry verifyAddReport function",
-        phosphor::logging::entry(
-            "FILENAME=%s",
-            static_cast<std::filesystem::path>(path).c_str()),
+        "3- Telemetry verifyAddReport function",
         phosphor::logging::entry("appendLimit=%u maxAppendLimit=%u",appendLimit,maxAppendLimit));
 
     if (reports.size() >= maxReports)
