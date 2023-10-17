@@ -22,9 +22,10 @@ ReportManager::ReportManager(
     reportFactory(std::move(reportFactoryIn)),
     reportStorage(std::move(reportStorageIn)), objServer(objServerIn)
 {
-    phosphor::logging::log<phosphor::logging::level::ERR>(
-        "1- Telemetry ReportManager function",
-        phosphor::logging::entry("maxAppendLimit=%u",maxAppendLimit));
+
+    std::string msg =
+    "1- Telemetry ReportManager function maxAppendLimit=" + maxAppendLimit;
+    phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
 
     reports.reserve(maxReports);
 
@@ -66,10 +67,10 @@ ReportManager::ReportManager(
                         reportUpdates =
                             utils::enumToString(ReportUpdates::overwrite);
                     }
-                    phosphor::logging::log<phosphor::logging::level::ERR>(
-                        "2- Telemetry ReportManager register_method AddReport",
-                        phosphor::logging::entry("appendLimit=%u maxAppendLimit=%u",appendLimit,maxAppendLimit));
-
+                    std::string msg2 =
+                    "2- Telemetry ReportManager AddReport appendLimit=" +
+                    appendLimit + "maxAppendLimit=" + maxAppendLimit;
+                    phosphor::logging::log<phosphor::logging::level::ERR>(msg2.c_str());
 
                     if (appendLimit == std::numeric_limits<uint64_t>::max())
                     {
@@ -112,9 +113,10 @@ void ReportManager::verifyAddReport(
     const std::vector<LabeledMetricParameters>& readingParams)
 {
     namespace ts = utils::tstring;
-    phosphor::logging::log<phosphor::logging::level::ERR>(
-        "3- Telemetry verifyAddReport function",
-        phosphor::logging::entry("appendLimit=%u maxAppendLimit=%u",appendLimit,maxAppendLimit));
+    std::string msg =
+    "3- Telemetry verifyAddReport appendLimit=" +
+    appendLimit + "maxAppendLimit=" + maxAppendLimit;
+    phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
 
     if (reports.size() >= maxReports)
     {
