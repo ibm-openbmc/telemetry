@@ -13,12 +13,10 @@ class FunctionMinimum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
-        std::string msg
-        for (auto kt = std::next(readings.begin()); kt != readings.end();
-             ++kt)
+        for (auto kt = std::next(readings.begin()); kt != readings.end(); ++kt)
         {
             std::string msg = "readings array 1st: " + std::to_string(kt.first) +
-                "2nd: " +  std::to_string(kt.seconnd);
+                "2nd: " +  std::to_string(kt.second);
             phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
         }
 
@@ -37,9 +35,9 @@ class FunctionMinimum : public CollectionFunction
     double calculateForStartupInterval(std::vector<ReadingItem>& readings,
                                        Milliseconds timestamp) const override
     {
-        std::string msg2 =
-        "2- Telemetry calculateForStartupInterval calculate:" + std::to_string(calculate(readings, timestamp);
-        phosphor::logging::log<phosphor::logging::level::ERR>(msg2.c_str());
+//        std::string msg2 =
+//        "2- Telemetry calculateForStartupInterval calculate:" + std::to_string(calculate(readings, timestamp);
+//        phosphor::logging::log<phosphor::logging::level::ERR>(msg2.c_str());
 
         readings.assign(
             {ReadingItem(timestamp, calculate(readings, timestamp))});
