@@ -17,30 +17,13 @@ class FunctionMinimum : public CollectionFunction
                      Milliseconds) const override
     {
 
+        std::cout <<  "calculate start" << std::endl;
         for (auto kt = std::next(readings.rbegin()); kt != readings.rend();
              ++kt)
         {
             const auto& [nextItemTimestamp, nextItemReading] = *std::prev(kt);
             std::cout << "kt prev: " << nextItemTimestamp << " and " << nextItemReading << std::endl;
         }
-
-
-//        for (auto kt = std::next(readings.begin()); kt != readings.end(); ++kt)
-//        {
-//            std::tuple_element<0,decltype(kt)>::type first = std::get<0>(kt);
-//            std::tuple_element<1,decltype(kt)>::type second = std::get<1>(kt);
-
-
-//            const auto& [ItemTimestamp, ItemReading] = *(kt);
-
-//            std::string msg = "readings array 1st: " + std::to_string(ItemTimestamp) +
-//                "2nd: " +  std::to_string(ItemReading);
-//
-//            std::cout << "kt contains: " << first << " and " second << std::endl;
-//            std::string msg
-//            phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
-//        }
-//
 
         return std::min_element(
                    readings.begin(), readings.end(),
@@ -56,9 +39,7 @@ class FunctionMinimum : public CollectionFunction
     double calculateForStartupInterval(std::vector<ReadingItem>& readings,
                                        Milliseconds timestamp) const override
     {
-//        std::string msg2 =
-//        "2- Telemetry calculateForStartupInterval calculate:" + std::to_string(calculate(readings, timestamp);
-//        phosphor::logging::log<phosphor::logging::level::ERR>(msg2.c_str());
+        std::cout <<  "calculateForStartupInterval: " << timestamp << std::endl;
 
         readings.assign(
             {ReadingItem(timestamp, calculate(readings, timestamp))});
