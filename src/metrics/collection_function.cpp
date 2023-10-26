@@ -15,11 +15,18 @@ class FunctionMinimum : public CollectionFunction
     {
         for (auto kt = std::next(readings.begin()); kt != readings.end(); ++kt)
         {
-            const auto& [ItemTimestamp, ItemReading] = *std:pair(kt);
+            std::tuple_element<0,decltype(kt)>::type first = std::get<0>(kt);
+            std::tuple_element<1,decltype(kt)>::type second = std::get<1>(kt);
 
-            std::string msg = "readings array 1st: " + std::to_string(ItemTimestamp) +
-                "2nd: " +  std::to_string(ItemReading);
-            phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
+
+//            const auto& [ItemTimestamp, ItemReading] = *(kt);
+
+//            std::string msg = "readings array 1st: " + std::to_string(ItemTimestamp) +
+//                "2nd: " +  std::to_string(ItemReading);
+//
+            std::cout << "kt contains: " << first << " and " second << std::endl;
+//            std::string msg
+//            phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
         }
 
 
