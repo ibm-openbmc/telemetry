@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <phosphor-logging/log.hpp>
+
 namespace metrics
 {
 
@@ -11,6 +13,11 @@ class FunctionMinimum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
+        std::string msg1 =
+        "1- Telemetry calculate reading.begin:" + std::to_string(readings.begin()) +
+        "reading.end:" + readings.end();
+        phosphor::logging::log<phosphor::logging::level::ERR>(msg1.c_str());
+
         return std::min_element(
                    readings.begin(), readings.end(),
                    [](const auto& left, const auto& right) {
@@ -25,6 +32,10 @@ class FunctionMinimum : public CollectionFunction
     double calculateForStartupInterval(std::vector<ReadingItem>& readings,
                                        Milliseconds timestamp) const override
     {
+        std::string msg2 =
+        "2- Telemetry calculateForStartupInterval calculate:" + std::to_string(calculate(readings, timestamp);
+        phosphor::logging::log<phosphor::logging::level::ERR>(msg2.c_str());
+
         readings.assign(
             {ReadingItem(timestamp, calculate(readings, timestamp))});
         return readings.back().second;
