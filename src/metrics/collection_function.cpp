@@ -15,8 +15,10 @@ class FunctionMinimum : public CollectionFunction
     {
         for (auto kt = std::next(readings.begin()); kt != readings.end(); ++kt)
         {
-            std::string msg = "readings array 1st: " + std::to_string(kt.first) +
-                "2nd: " +  std::to_string(kt.second);
+            const auto& [ItemTimestamp, ItemReading] = *kt;
+
+            std::string msg = "readings array 1st: " + std::to_string(ItemTimesStamp) +
+                "2nd: " +  std::to_string(ItemReading);
             phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
         }
 
