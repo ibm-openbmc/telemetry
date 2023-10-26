@@ -17,7 +17,7 @@ class FunctionMinimum : public CollectionFunction
         {
             const auto& [ItemTimestamp, ItemReading] = *kt;
 
-            std::string msg = "readings array 1st: " + std::to_string(ItemTimesStamp) +
+            std::string msg = "readings array 1st: " + std::to_string(ItemTimestamp) +
                 "2nd: " +  std::to_string(ItemReading);
             phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
         }
