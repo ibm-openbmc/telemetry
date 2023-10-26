@@ -3,6 +3,9 @@
 #include <cmath>
 
 #include <phosphor-logging/log.hpp>
+#include <iostream>
+#include <tuple>
+
 
 namespace metrics
 {
