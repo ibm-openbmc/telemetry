@@ -21,7 +21,7 @@ class FunctionMinimum : public CollectionFunction
              ++kt)
         {
             const auto& [nextItemTimestamp, nextItemReading] = *std::prev(kt);
-            std::cout << "kt prev: " << nextItemTimestamp << " and " nextItemReading << std::endl;
+            std::cout << "kt prev: " << nextItemTimestamp << " and " << nextItemReading << std::endl;
         }
 
 
