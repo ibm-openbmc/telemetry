@@ -13,10 +13,15 @@ class FunctionMinimum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
-        std::string msg1 =
-        "1- Telemetry calculate reading.begin:" + std::to_string(readings.begin()) +
-        "reading.end:" + readings.end();
-        phosphor::logging::log<phosphor::logging::level::ERR>(msg1.c_str());
+        std::string msg
+        for (auto kt = std::next(readings.begin()); kt != readings.end();
+             ++kt)
+        {
+            std::string msg = "readings array 1st: " + std::to_string(kt.first) +
+                "2nd: " +  std::to_string(kt.seconnd);
+            phosphor::logging::log<phosphor::logging::level::ERR>(msg.c_str());
+        }
+
 
         return std::min_element(
                    readings.begin(), readings.end(),
