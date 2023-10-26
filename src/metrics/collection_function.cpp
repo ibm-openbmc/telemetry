@@ -15,7 +15,7 @@ class FunctionMinimum : public CollectionFunction
     {
         for (auto kt = std::next(readings.begin()); kt != readings.end(); ++kt)
         {
-            const auto& [ItemTimestamp, ItemReading] = *kt;
+            const auto& [ItemTimestamp, ItemReading] = *std:pair(kt);
 
             std::string msg = "readings array 1st: " + std::to_string(ItemTimestamp) +
                 "2nd: " +  std::to_string(ItemReading);
