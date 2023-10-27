@@ -19,11 +19,11 @@ class FunctionMinimum : public CollectionFunction
 
         std::cout <<  "calculate start" << std::endl;
         int i=0;
-        for (auto kt = std::next(readings.rbegin()); kt != readings.rend();
+        for (auto kt = std::next(readings.begin()); kt != readings.end();
              ++kt)
         {
-            const auto& [nextItemTimestamp, nextItemReading] = *std::prev(kt);
-            std::cout << "kt prev: " << nextItemTimestamp << " and " << nextItemReading << std::endl;
+            const auto& [nextItemTimestamp, nextItemReading] = *(kt);
+            std::cout << "n=" << i << "kt: " << nextItemTimestamp << " and " << nextItemReading << std::endl;
             i++;
         }
         std::cout << "count=" << i << std::endl;
