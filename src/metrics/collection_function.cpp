@@ -2,6 +2,11 @@
 
 #include <cmath>
 
+#include <phosphor-logging/log.hpp>
+#include <iostream>
+#include <tuple>
+
+
 namespace metrics
 {
 
@@ -11,6 +16,30 @@ class FunctionMinimum : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds) const override
     {
+
+        std::cout <<  "calculate start" << std::endl;
+        int i=0;
+        for (auto kt = std::next(readings.begin()); kt != readings.end();
+             ++kt)
+        {
+            const auto& [nextItemTimestamp, nextItemReading] = *(kt);
+            std::cout << "n=" << i << "kt: " << nextItemTimestamp << " and " << nextItemReading << std::endl;
+            i++;
+        }
+        std::cout << "count=" << i << std::endl;
+
+        std::cout << "result=" << std::min_element(
+                   readings.begin(), readings.end(),
+                   [](const auto& left, const auto& right) {
+                       return std::make_tuple(!std::isfinite(left.second),
+                                              left.second) <
+                              std::make_tuple(!std::isfinite(right.second),
+                                              right.second);
+                   })
+            ->second;
+        std::cout << std::endl;
+
+
         return std::min_element(
                    readings.begin(), readings.end(),
                    [](const auto& left, const auto& right) {
@@ -25,6 +54,8 @@ class FunctionMinimum : public CollectionFunction
     double calculateForStartupInterval(std::vector<ReadingItem>& readings,
                                        Milliseconds timestamp) const override
     {
+        std::cout <<  "calculateForStartupInterval: " << timestamp << std::endl;
+
         readings.assign(
             {ReadingItem(timestamp, calculate(readings, timestamp))});
         return readings.back().second;
