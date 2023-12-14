@@ -1,6 +1,9 @@
 #include "metrics/collection_function.hpp"
 
 #include <cmath>
+#include <phosphor-logging/log.hpp>
+#include <iostream>
+#include <tuple>
 
 namespace metrics
 {
@@ -63,6 +66,7 @@ class FunctionAverage : public CollectionFunction
     double calculate(const std::vector<ReadingItem>& readings,
                      Milliseconds timestamp) const override
     {
+        std::cout <<  "FuntionAverage calculate start" << std::endl;
         auto valueSum = 0.0;
         auto timeSum = Milliseconds{0};
         for (auto it = readings.begin(); it != std::prev(readings.end()); ++it)
@@ -73,12 +77,18 @@ class FunctionAverage : public CollectionFunction
                 const auto duration = kt->first - it->first;
                 valueSum += it->second * duration.count();
                 timeSum += duration;
+                std::cout << "1) duration:" <<  duration << " valueSum:" << valueSum << " timeSum:" << timeSum << std::endl;
             }
         }
+
+        std::cout << "2) valueSum:" << valueSum << " timeSum:" << timeSum << std::endl;
 
         const auto duration = timestamp - readings.back().first;
         valueSum += readings.back().second * duration.count();
         timeSum += duration;
+        std::cout << "3) duration:" <<  duration << " valueSum:" << valueSum << " timeSum:" << timeSum << std::endl;
+        std::cout << "4) return:" <<  valueSum / std::max(timeSum.count(), uint64_t{1u}) << std::endl;
+
 
         return valueSum / std::max(timeSum.count(), uint64_t{1u});
     }
