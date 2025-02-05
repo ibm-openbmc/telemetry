@@ -38,7 +38,8 @@ option(
     'max-append-limit',
     type: 'integer',
     min: 0,
-    value: 16384,
+    value: 512,
+#   value: 16384,
     description: 'Max AppendLimit value',
 )
 option(
