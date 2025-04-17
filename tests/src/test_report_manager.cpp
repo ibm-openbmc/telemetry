@@ -147,7 +147,7 @@ TEST_F(TestReportManager, addReportWithOnlyDefaultParams)
     EXPECT_CALL(reportFactoryMock, convertMetricParams(_, _));
     EXPECT_CALL(reportFactoryMock,
                 make("Report"s, "Report"s, ReportingType::onRequest,
-                     std::vector<ReportAction>{}, Milliseconds{}, 8192,
+                     std::vector<ReportAction>{}, Milliseconds{}, 2048,
                      ReportUpdates::overwrite, _, _,
                      std::vector<LabeledMetricParameters>{}, true, Readings{}))
         .WillOnce(Return(ByMove(std::move(reportMockPtr))));
